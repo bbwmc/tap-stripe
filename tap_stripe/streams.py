@@ -51,6 +51,7 @@ EVENT_TYPE_FILTERS = {
     "discounts": {"type": "customer.discount.*"},
     "disputes": {"type": "charge.dispute.*"},
     "invoices": {"type": "invoice.*"},
+    "payment_intents": {"type": "payment_intent.*"},
     "payouts": {"type": "payout.*"},
     "plans": {"type": "plan.*"},
     "promotion_codes": {"type": "promotion_code.*"},
@@ -278,6 +279,15 @@ class RefundsStream(StripeStream):
     primary_keys = ["id"]
     replication_key = "created"
     schema_filepath = SCHEMAS_DIR / "refunds.schema.json"
+
+
+class PaymentIntentsStream(StripeStream):
+    """Stripe Payment Intents stream."""
+
+    name = "payment_intents"
+    primary_keys = ["id"]
+    replication_key = "created"
+    schema_filepath = SCHEMAS_DIR / "payment-intents.schema.json"
 
 
 class SubscriptionSchedulesStream(StripeStream):
